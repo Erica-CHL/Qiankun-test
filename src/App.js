@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          尝试使用qiankun建立base应用
         </a>
       </header>
     </div>
