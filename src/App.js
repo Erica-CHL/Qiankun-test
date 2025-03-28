@@ -1,28 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
+import { registerMicroApps,start } from 'qiankun';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          尝试使用qiankun建立base应用
-        </a>
-        <p>
-          增加代码提交
-        </p>
-      </header>
-    </div>
+   <div>
+      <div>
+        <div>
+           <a href='/'>主应用</a>
+        </div>
+         <div>
+           <a href='/micro-app1'>微应用1</a>
+         </div>
+       
+      </div>
+      <div>
+         <div id="root-content">主内容区域</div>
+         <div id="micro-container">微应用区域</div>
+      </div>
+   </div>
   );
 }
+
+// 注册微应用
+registerMicroApps([
+  {
+    name: 'micro-app1', // 微应用名称（唯一）
+    entry: process.env.NODE_ENV === 'development' 
+      ? '//localhost:3001' 
+      : '/micro-app1/', // 生产环境路径
+    container: '#micro-container', // 容器ID
+    activeRule: '/micro-app1', // 激活路径（通过URL访问）
+    props: { 
+      // 可传递全局数据给微应用
+      basePath: '/micro-app1'
+    }
+  }
+]);
+
+start()
 
 export default App;
